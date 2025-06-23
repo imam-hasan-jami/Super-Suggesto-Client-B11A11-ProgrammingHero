@@ -18,17 +18,15 @@ const Login = () => {
         </h2>
         <form onSubmit={handleLogin} className="card-body">
           <fieldset className="fieldset">
-            {/* email  */}
             <label className="label">Email</label>
             <input
               name="email"
               type="email"
               className="input"
               placeholder="Email"
-              //   onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {/* passowrd  */}
+
             <label className="label">Password</label>
             <input
               name="password"
@@ -37,16 +35,6 @@ const Login = () => {
               placeholder="Password"
               required
             />
-
-            {/* <div>
-              <Link to={`/auth/forget-password?email=${encodeURIComponent(email)}`} className="link link-hover">Forgot password?</Link>
-            </div> */}
-
-            {/* {error && (
-              <p className="text-red-500 text-xs font-semibold text-center mt-3">
-                {error}
-              </p>
-            )} */}
 
             <button type="submit" className="btn bg-red-700 text-white mt-4">
               Login
@@ -83,7 +71,7 @@ const Login = () => {
                   ></path>
                 </g>
               </svg>
-              Login with Google
+              Sign-in with Google
             </button>
 
             <p className="font-semibold text-sm text-center pt-5 ">
