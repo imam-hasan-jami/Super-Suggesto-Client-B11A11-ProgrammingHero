@@ -1,9 +1,48 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../providers/AuthContext";
 
 const Register = () => {
+  const { createUser } = use(AuthContext);
+
   const handleRegister = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const { email, password, ...restFormData } = Object.fromEntries(
+      formData.entries()
+    );
+
+    createUser(email, password).then((result) => {
+      const user = result.user;
+      console.log("user registered successfully", user);
+    });
+
+    const userProfile = {
+      email,
+      ...restFormData,
+    };
+
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userProfile),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          console.log("User profile created successfully", data);
+          // form.reset();
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
 
   return (
