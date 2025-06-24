@@ -1,8 +1,31 @@
-import React from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../assets/logo.png";
+import { AuthContext } from "../providers/AuthContext";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+
+  const { user, logOut } = use(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Logout successfully.`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
+
   const links = (
     <>
       <li>
@@ -25,16 +48,56 @@ const Navbar = () => {
           Queries
         </NavLink>
       </li>
+      {!user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              `${isActive ? "bg-red-700 text-white" : ""}`
+            }
+            to="/login"
+          >
+            Log-in
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink
           className={({ isActive }) =>
             `${isActive ? "bg-red-700 text-white" : ""}`
           }
-          to="/login"
+          to={`/my-plants/${user?.email}`}
         >
-          Log-in
+          Recommendations For Me
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            `${isActive ? "bg-red-700 text-white" : ""}`
+          }
+          to={`/my-plants/${user?.email}`}
+        >
+          My Queries
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            `${isActive ? "bg-red-700 text-white" : ""}`
+          }
+          to={`/my-plants/${user?.email}`}
+        >
+          My recommendations
+        </NavLink>
+      </li>
+      {user && (
+        <button
+          onClick={handleLogout}
+          className="btn bg-white border border-red-700 text-red-700 px-5"
+        >
+          Logout
+        </button>
+      )}
     </>
   );
 
@@ -66,28 +129,10 @@ const Navbar = () => {
             }
           >
             {links}
-            {/* <div className="flex flex-col gap-2 mt-3">
-              <Link
-                to="/login"
-                className={"px-4 border-2 border-red-700"}
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className={"px-4 border-2 border-red-700"}
-              >
-                Register
-              </Link>
-            </div> */}
           </ul>
         </div>
         <div className="flex items-center gap-2 pl-5">
-          <img
-            className="hidden lg:flex w-7"
-            src={logo}
-            alt=""
-          />
+          <img className="hidden lg:flex w-7" src={logo} alt="" />
           <Link
             to="/"
             className={
@@ -98,24 +143,29 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden lg:flex lg:items-center">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end px-5">
-        {/* <div className="space-x-4 hidden lg:flex">
-          <Link
-            to="/login"
-            className={"btn px-5 border-2 border-red-700 text-red-700"}
-          >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className={"btn px-5 border-2 border-red-700 text-red-700"}
-          >
-            Register
-          </Link>
-        </div> */}
+
+        {/* {user ? (
+          <div className="flex items-center gap-2">
+            <div className="tooltip tooltip-bottom" data-tip={user.name || ""}>
+              <img
+                className="w-10 h-10 rounded-full hidden lg:block"
+                src={user.photoURL}
+                alt="user profile pic"
+              />
+            </div>
+            <button
+              onClick={handleLogout}
+              className="btn bg-red-600 text-white px-5"
+            >
+              Logout
+            </button>
+          </div>
+        ) : ""} */}
+
       </div>
     </div>
   );
