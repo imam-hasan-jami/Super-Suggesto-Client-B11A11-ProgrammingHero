@@ -60,36 +60,42 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            `${isActive ? "bg-red-700 text-white" : ""}`
-          }
-          to={`/my-plants/${user?.email}`}
-        >
-          Recommendations For Me
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            `${isActive ? "bg-red-700 text-white" : ""}`
-          }
-          to={`/my-plants/${user?.email}`}
-        >
-          My Queries
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            `${isActive ? "bg-red-700 text-white" : ""}`
-          }
-          to={`/my-plants/${user?.email}`}
-        >
-          My recommendations
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              `${isActive ? "bg-red-700 text-white" : ""}`
+            }
+            to={`/my-plants/${user?.email}`}
+          >
+            Recommendations For Me
+          </NavLink>
+        </li>
+      )}
+      {user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              `${isActive ? "bg-red-700 text-white" : ""}`
+            }
+            to={`/my-plants/${user?.email}`}
+          >
+            My Queries
+          </NavLink>
+        </li>
+      )}
+      {user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              `${isActive ? "bg-red-700 text-white" : ""}`
+            }
+            to={`/my-plants/${user?.email}`}
+          >
+            My recommendations
+          </NavLink>
+        </li>
+      )}
       {user && (
         <button
           onClick={handleLogout}

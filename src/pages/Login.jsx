@@ -1,9 +1,41 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../providers/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
+
+  const { loginUser } = use(AuthContext);
+
   const handleLogin = (e) => {
     e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    loginUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Login successful`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Incorrect email or password!`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      });
   };
 
   const handleGoogleSignIn = () => {}
