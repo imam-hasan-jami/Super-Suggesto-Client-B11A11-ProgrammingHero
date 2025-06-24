@@ -54,11 +54,11 @@ const AddQuery = () => {
               </div>
 
               <div className="flex flex-col">
-                <label className="label mt-5">Description:</label>
+                <label className="label mt-5">Boycotting Reason Details</label>
                 <textarea
                   name="description"
-                  placeholder="Description of the plant"
-                  className="mt-5 border border-gray-300 p-3 bg-base-200 text-gray-800"
+                  placeholder="The reason why you don't want this product"
+                  className="bg-white border border-gray-300 p-3 text-gray-800"
                   rows="4"
                   required
                 />
