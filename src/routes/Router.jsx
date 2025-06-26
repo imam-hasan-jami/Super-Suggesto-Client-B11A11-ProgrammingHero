@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddQuery from "../pages/AddQuery";
+import MyQueries from "../pages/MyQueries";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/add-query",
         Component: AddQuery,
+      },
+      {
+        path: "/my-queries",
+        Component: MyQueries,
       }
     ]
   },
