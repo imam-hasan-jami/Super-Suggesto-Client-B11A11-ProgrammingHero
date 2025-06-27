@@ -78,7 +78,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `${isActive ? "bg-red-700 text-white" : ""}`
             }
-            to={`/my-plants/${user?.email}`}
+            to={`/my-queries/${user?.email}`}
           >
             My Queries
           </NavLink>

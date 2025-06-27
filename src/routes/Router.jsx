@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddQuery from "../pages/AddQuery";
 import MyQueries from "../pages/MyQueries";
+import Loading from "../components/Loading";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,9 @@ const router = createBrowserRouter([
         Component: AddQuery,
       },
       {
-        path: "/my-queries",
+        path: "/my-queries/:email",
+        loader: ({ params }) => fetch(`http://localhost:3000/my-queries/${params.email}`),
+        hydrateFallbackElement: <Loading />,
         Component: MyQueries,
       }
     ]
