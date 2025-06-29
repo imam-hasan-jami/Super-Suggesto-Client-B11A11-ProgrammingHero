@@ -5,6 +5,10 @@ const MyQueries = () => {
   const initalQueries = useLoaderData();
   const [queries, setQueries] = useState(initalQueries);
 
+  const handleDeleteQuery = () => {
+
+  }
+
   return (
     <div>
       {/* add query banner button */}
@@ -23,7 +27,9 @@ const MyQueries = () => {
       <div>
         {/* queries display section */}
         <div className="container mx-auto px-4 py-8">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 my-5">My Queries</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 my-5">
+            My Queries
+          </h2>
           {queries && Array.isArray(queries) && queries.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {queries
@@ -55,6 +61,27 @@ const MyQueries = () => {
                         <span className="badge bg-red-500 text-white">
                           {query.recommendationCount} recommendations
                         </span>
+                      </div>
+
+                      <div className="card-actions justify-center mt-8 gap-2">
+                        <Link
+                          to={`/query-details/${query._id}`}
+                          className="btn btn-sm bg-blue-500 hover:bg-blue-600 text-white border-0"
+                        >
+                          View Details
+                        </Link>
+                        <Link
+                          to={`/update-query/${query._id}`}
+                          className="btn btn-sm bg-green-500 hover:bg-green-600 text-white border-0"
+                        >
+                          Update
+                        </Link>
+                        <button
+                          onClick={() => handleDeleteQuery(query._id)}
+                          className="btn btn-sm bg-red-500 hover:bg-red-600 text-white border-0"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>

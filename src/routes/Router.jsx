@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import AddQuery from "../pages/AddQuery";
 import MyQueries from "../pages/MyQueries";
 import Loading from "../components/Loading";
+import QueryDetails from "../pages/QueryDetails";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,13 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:3000/queries/user/${params.email}`),
         hydrateFallbackElement: <Loading />,
         Component: MyQueries,
-      }
+      },
+      {
+        path: "/query-details/:id",
+        loader: ({ params }) => fetch(`http://localhost:3000/queries/${params.id}`),
+        hydrateFallbackElement: <Loading />,
+        Component: QueryDetails,
+      },
     ]
   },
 ]);
