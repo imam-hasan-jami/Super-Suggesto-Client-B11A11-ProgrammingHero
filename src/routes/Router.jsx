@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-queries/:email",
-        loader: ({ params }) => fetch(`http://localhost:3000/my-queries/${params.email}`),
+        loader: ({ params }) => fetch(`http://localhost:3000/queries/user/${params.email}`),
         hydrateFallbackElement: <Loading />,
         Component: MyQueries,
       }
