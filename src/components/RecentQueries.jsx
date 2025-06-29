@@ -42,7 +42,7 @@ const RecentQueries = () => {
                 <img
                   src={query.userPhotoURL}
                   alt={query.userName}
-                  className="w-8 h-8 rounded-full"
+                  className="w-8 h-8 rounded-full object-cover"
                 />
                 <span className="text-sm">{query.userName}</span>
               </div>
@@ -50,7 +50,7 @@ const RecentQueries = () => {
                 <span className="text-xs text-gray-500">
                   {new Date(query.dateTime).toLocaleDateString()}
                 </span>
-                <span className="badge badge-secondary">
+                <span className="badge bg-red-500 text-white">
                   {query.recommendationCount} recommendations
                 </span>
               </div>
