@@ -1,13 +1,43 @@
 import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const MyQueries = () => {
   const initalQueries = useLoaderData();
   const [queries, setQueries] = useState(initalQueries);
 
-  const handleDeleteQuery = () => {
+  const handleDeleteQuery = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/queries/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Query has been deleted.",
+                icon: "success",
+              });
 
-  }
+              const remainingQueries = queries.filter(
+                (plantt) => plantt._id !== _id
+              );
+              setQueries(remainingQueries);
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div>
