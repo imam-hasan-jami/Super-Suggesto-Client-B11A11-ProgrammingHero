@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../providers/AuthContext";
 import Swal from "sweetalert2";
@@ -13,12 +13,19 @@ const UpdateQuery = () => {
     description,
   } = useLoaderData();
 
+  const { user } = use(AuthContext);
+
   const handleUpdateQuery = (e) => {
     e.preventDefault();
 
     const form = e.target;
     const formData = new FormData(form);
     const updatedQuery = Object.fromEntries(formData.entries());
+
+    updatedQuery.userEmail = user?.email || "";
+    updatedQuery.userName = user?.name || "";
+    updatedQuery.userPhotoURL = user?.photoURL || "";
+    updatedQuery.dateTime = new Date().toISOString();
 
     fetch(`http://localhost:3000/queries/${_id}`, {
       method: "PUT",
