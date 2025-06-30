@@ -7,6 +7,7 @@ import AddQuery from "../pages/AddQuery";
 import MyQueries from "../pages/MyQueries";
 import Loading from "../components/Loading";
 import QueryDetails from "../pages/QueryDetails";
+import UpdateQuery from "../pages/UpdateQuery";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,12 @@ const router = createBrowserRouter([
         hydrateFallbackElement: <Loading />,
         Component: QueryDetails,
       },
+      {
+        path: "/update-query/:id",
+        loader: ({ params }) => fetch(`http://localhost:3000/queries/${params.id}`),
+        hydrateFallbackElement: <Loading />,
+        Component: UpdateQuery,
+      }
     ]
   },
 ]);
