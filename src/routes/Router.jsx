@@ -8,6 +8,7 @@ import MyQueries from "../pages/MyQueries";
 import Loading from "../components/Loading";
 import QueryDetails from "../pages/QueryDetails";
 import UpdateQuery from "../pages/UpdateQuery";
+import Queries from "../pages/Queries";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/queries",
+        loader: () => fetch("http://localhost:3000/queries"),
+        hydrateFallbackElement: <Loading />,
+        Component: Queries,
       },
       {
         path: "/add-query",
