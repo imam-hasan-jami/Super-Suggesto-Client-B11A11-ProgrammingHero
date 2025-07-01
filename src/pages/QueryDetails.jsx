@@ -2,19 +2,24 @@ import React from "react";
 import { useLoaderData } from "react-router";
 import { FaUser } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
+import { IoMdAdd } from "react-icons/io";
 
 const QueryDetails = () => {
   const query = useLoaderData();
 
+  const handleAddRecommendation = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-15">
       <div className="bg-gradient-to-r from-red-600 to-red-800 text-white py-8">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold mb-2">Query Details</h1>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="w-11/12 mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="relative">
             <img
@@ -93,6 +98,86 @@ const QueryDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="bg-white w-386 mx-auto rounded-lg shadow-lg px-4 py-8">
+        <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4">
+          <h2 className="text-2xl font-bold flex items-center gap-2">
+            <IoMdAdd />
+            Add Your Recommendation
+          </h2>
+          <p className="text-green-100 mt-1">
+            Help others by sharing your recommendation
+          </p>
+        </div>
+
+        <div className="p-6">
+          <form onSubmit={handleAddRecommendation}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col">
+                <label className="label text-gray-700 font-semibold mb-2">
+                  Recommendation Title
+                </label>
+                <input
+                  name="recommendationTitle"
+                  type="text"
+                  className="input w-full border-gray-300 rounded-lg p-3"
+                  placeholder="e.g., Great Alternative with Better Quality"
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col">
+                <label className="label text-gray-700 font-semibold mb-2">
+                  Recommended Product Name
+                </label>
+                <input
+                  name="recommendedProductName"
+                  type="text"
+                  className="input w-full border-gray-300 rounded-lg p-3"
+                  placeholder="Enter the product name you recommend"
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col md:col-span-2">
+                <label className="label text-gray-700 font-semibold mb-2">
+                  Recommended Product Image URL
+                </label>
+                <input
+                  name="recommendedProductImage"
+                  type="url"
+                  className="input w-full border-gray-300 rounded-lg p-3"
+                  placeholder="Paste the image URL of the recommended product"
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col md:col-span-2">
+                <label className="label text-gray-700 font-semibold mb-2">
+                  Recommendation Reason
+                </label>
+                <textarea
+                  name="recommendationReason"
+                  placeholder="Explain why you recommend this product. What makes it better? Share your experience..."
+                  className="w-full border border-gray-300 rounded-lg p-3"
+                  rows="4"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-center mt-6">
+              <button
+                type="submit"
+                className="btn bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-colors"
+              >
+                <IoMdAdd />
+                Add Recommendation
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
