@@ -1,5 +1,7 @@
 import React from "react";
 import { useLoaderData } from "react-router";
+import { FaUser } from "react-icons/fa";
+import { IoCalendarOutline } from "react-icons/io5";
 
 const QueryDetails = () => {
   const query = useLoaderData();
@@ -29,6 +31,28 @@ const QueryDetails = () => {
 
           <div className="p-6 md:p-8">
             <div className="mb-6">
+              <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center gap-2">
+                  <FaUser />
+                  Posted by
+                </h3>
+                <div className="flex items-center gap-4">
+                  <img
+                    src={query.userPhotoURL}
+                    alt={query.userName}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-green-200"
+                  />
+                  <div>
+                    <p className="font-semibold text-green-800 text-lg">
+                      {query.userName}
+                    </p>
+                    <p className="text-green-600 text-sm">{query.userEmail}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-6">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
                 {query.productName}
               </h2>
@@ -55,7 +79,10 @@ const QueryDetails = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-blue-800">Date Posted</h4>
+                <div className="flex items-center gap-2 mb-2">
+                  <IoCalendarOutline size={20} className="text-blue-800" />
+                  <h4 className="font-semibold text-blue-800">Date Posted</h4>
+                </div>
                 <p className="text-blue-700">
                   {new Date(query.dateTime).toLocaleDateString("en-US", {
                     year: "numeric",
