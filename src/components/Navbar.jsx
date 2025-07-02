@@ -90,7 +90,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `${isActive ? "bg-red-700 text-white" : ""}`
             }
-            to={`/my-plants/${user?.email}`}
+            to={`/my-recommendations/${user?.email}`}
           >
             My recommendations
           </NavLink>
@@ -99,7 +99,7 @@ const Navbar = () => {
       {user && (
         <button
           onClick={handleLogout}
-          className="btn bg-white border border-red-700 text-red-700 px-5"
+          className="btn bg-white border border-red-700 text-red-700 px-5 ml-3"
         >
           Logout
         </button>
