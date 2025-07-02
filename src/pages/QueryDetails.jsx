@@ -1,14 +1,54 @@
-import React from "react";
+import React, { use } from "react";
 import { useLoaderData } from "react-router";
+import { AuthContext } from '../providers/AuthContext';
 import { FaUser } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
+import Swal from "sweetalert2";
 
 const QueryDetails = () => {
   const query = useLoaderData();
+  const { user } = use(AuthContext);
 
   const handleAddRecommendation = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const newRecommendation = Object.fromEntries(formData.entries());
+
+    newRecommendation.queryId = query?._id || "";
+    newRecommendation.queryTitle = query?.queryTitle || "";
+    newRecommendation.productName = query?.productName || "";
+    newRecommendation.userEmail = query?.userEmail || "";
+    newRecommendation.userName = query?.userName || "";
+    newRecommendation.recommenderEmail = user?.email || "";
+    newRecommendation.recommenderName = user?.name || "";
+    newRecommendation.dateTime = new Date().toISOString();
+
+    fetch("http://localhost:3000/recommendations", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newRecommendation),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Recommendation Added Successfully.`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          // form.reset();
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding recommendation:", error);
+      });
   };
 
   return (

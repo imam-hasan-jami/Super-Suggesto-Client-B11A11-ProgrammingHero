@@ -40,7 +40,7 @@ const AddQuery = () => {
         }
       })
       .catch((error) => {
-        console.error("Error adding plant:", error);
+        console.error("Error adding query:", error);
       });
   };
 
