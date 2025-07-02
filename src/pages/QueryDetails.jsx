@@ -1,14 +1,32 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
-import { AuthContext } from '../providers/AuthContext';
+import { AuthContext } from "../providers/AuthContext";
 import { FaUser } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import Swal from "sweetalert2";
+import { MdOutlineStarPurple500 } from "react-icons/md";
 
 const QueryDetails = () => {
   const query = useLoaderData();
   const { user } = use(AuthContext);
+  const [recommendations, setRecommendations] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (query?._id) {
+      fetch(`http://localhost:3000/recommendations/query/${query._id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setRecommendations(data);
+          // setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching recommendations:", error);
+          // setLoading(false);
+        });
+    }
+  }, [query?._id]);
 
   const handleAddRecommendation = (e) => {
     e.preventDefault();
@@ -137,6 +155,90 @@ const QueryDetails = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-11/12 mx-auto px-4 py-8">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4">
+            <h2 className="text-2xl font-bold flex items-center gap-2">
+              <MdOutlineStarPurple500 />
+              Recommendations ({recommendations.length})
+            </h2>
+            <p className="text-purple-100 mt-1">
+              Community recommendations for this query
+            </p>
+          </div>
+
+          <div className="p-6">
+            {recommendations.length > 0 ? (
+              <div className="space-y-6">
+                {recommendations
+                  .sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime))
+                  .map((recommendation, index) => (
+                    <div
+                      key={index}
+                      className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-gray-800">
+                            {recommendation.recommenderName}
+                          </h4>
+                          <p className="text-sm text-gray-600">
+                            {recommendation.recommenderEmail}
+                          </p>
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {new Date(recommendation.dateTime).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            }
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Recommendation Content */}
+                      <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <h5 className="font-bold text-lg text-purple-800 mb-2">
+                          {recommendation.recommendationTitle}
+                        </h5>
+
+                        <div className="flex gap-6 mb-3">
+                          <div className="md:col-span-1">
+                            <img
+                              src={recommendation.recommendedProductImage}
+                              className="w-40 object-contain bg-white rounded-lg border border-gray-200 shadow-sm"
+                            />
+                          </div>
+                          <div className="md:col-span-2">
+                            <h6 className="font-semibold text-gray-800 mb-2">
+                              {recommendation.recommendedProductName}
+                            </h6>
+                            <p className="text-gray-700 text-sm leading-relaxed">
+                              {recommendation.recommendationReason}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <div className="text-gray-400 text-6xl mb-4">💡</div>
+                <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                  No recommendations yet
+                </h3>
+                <p className="text-gray-500">
+                  Be the first to recommend an alternative product!
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
