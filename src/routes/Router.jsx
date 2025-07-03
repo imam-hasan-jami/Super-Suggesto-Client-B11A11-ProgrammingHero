@@ -10,6 +10,7 @@ import QueryDetails from "../pages/QueryDetails";
 import UpdateQuery from "../pages/UpdateQuery";
 import Queries from "../pages/Queries";
 import MyRecommendations from "../pages/MyRecommendations";
+import RecommendationsForMe from "../pages/RecommendationsForMe";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,12 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:3000/recommendations/recommender/${params.email}`),
         hydrateFallbackElement: <Loading />,
         Component: MyRecommendations,
+      },
+      {
+        path: "/recommendations-for-me/:email",
+        loader: ({ params }) => fetch(`http://localhost:3000/recommendations/user/${params.email}`),
+        hydrateFallbackElement: <Loading />,
+        Component: RecommendationsForMe,
       }
     ]
   },

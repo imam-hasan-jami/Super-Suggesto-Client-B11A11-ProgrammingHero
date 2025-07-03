@@ -66,7 +66,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `${isActive ? "bg-red-700 text-white" : ""}`
             }
-            to={`/my-plants/${user?.email}`}
+            to={`/recommendations-for-me/${user?.email}`}
           >
             Recommendations For Me
           </NavLink>
