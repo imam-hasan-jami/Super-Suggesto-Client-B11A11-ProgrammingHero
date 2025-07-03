@@ -126,11 +126,11 @@ const RecommendationsForMe = () => {
                               {recommendation.recommendationTitle}
                             </h5>
 
-                            <div className="grid md:grid-cols-3 gap-4">
+                            <div className="flex gap-20">
                               <div className="md:col-span-1">
                                 <img
                                   src={recommendation.recommendedProductImage}
-                                  className="w-full h-32 object-contain bg-gray-50 rounded-lg border border-gray-200"
+                                  className="w-35 h-35 object-contain bg-gray-50 rounded-lg border border-gray-200"
                                 />
                               </div>
                               <div className="md:col-span-2">
