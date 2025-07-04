@@ -1,11 +1,14 @@
 import React, { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../providers/AuthContext";
 import Swal from "sweetalert2";
 
 const Login = () => {
 
   const { loginUser } = use(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -15,7 +18,7 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        navigate(`${location.state ? location.state : "/"}`);
         Swal.fire({
           position: "center",
           icon: "success",

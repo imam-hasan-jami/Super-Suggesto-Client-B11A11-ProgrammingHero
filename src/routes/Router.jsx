@@ -11,6 +11,7 @@ import UpdateQuery from "../pages/UpdateQuery";
 import Queries from "../pages/Queries";
 import MyRecommendations from "../pages/MyRecommendations";
 import RecommendationsForMe from "../pages/RecommendationsForMe";
+import PrivateRoute from "../providers/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,13 +38,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-query",
-        Component: AddQuery,
+        element: <PrivateRoute><AddQuery/></PrivateRoute>,
       },
       {
         path: "/my-queries/:email",
         loader: ({ params }) => fetch(`http://localhost:3000/queries/user/${params.email}`),
         hydrateFallbackElement: <Loading />,
-        Component: MyQueries,
+        element: <PrivateRoute><MyQueries/></PrivateRoute>
       },
       {
         path: "/query-details/:id",
