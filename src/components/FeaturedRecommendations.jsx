@@ -50,7 +50,7 @@ const FeaturedRecommendations = () => {
                   {recommendation.recommendedProductName}
                 </h3>
 
-                <div className="bg-purple-50 border-l-4 border-purple-400 p-3 mb-3">
+                <div className="bg-red-50 border-l-4 border-red-400 p-3 mb-3">
                   <p className="text-sm text-purple-700">
                     <span className="font-medium">Alternative to:</span>{" "}
                     {recommendation.productName}
@@ -102,7 +102,7 @@ const FeaturedRecommendations = () => {
       <div className="text-center mt-12">
         <Link
           to={`/recommendations-for-me/${user?.email}`}
-          className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold inline-block transition-colors"
+          className="bg-red-900 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold inline-block transition-colors"
         >
           View All Recommendations For You
         </Link>

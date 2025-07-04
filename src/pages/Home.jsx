@@ -18,7 +18,7 @@ const Home = () => {
             <div className='w-9/12 mx-auto my-20'>
                 <RecentQueries />
             </div>
-            <div className='bg-purple-50 py-16'>
+            <div className='bg-red-50 py-16'>
                 <div className='w-9/12 mx-auto'>
                     <FeaturedRecommendations />
                 </div>
