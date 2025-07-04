@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from '../components/Slider';
 import RecentQueries from '../components/RecentQueries';
 import HowItWorks from '../components/HowItWorks';
+import FeaturedRecommendations from '../components/FeaturedRecommendations';
 
 const Home = () => {
     return (
@@ -16,6 +17,11 @@ const Home = () => {
             </div>
             <div className='w-9/12 mx-auto my-20'>
                 <RecentQueries />
+            </div>
+            <div className='bg-purple-50 py-16'>
+                <div className='w-9/12 mx-auto'>
+                    <FeaturedRecommendations />
+                </div>
             </div>
         </div>
     );
