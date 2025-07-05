@@ -31,35 +31,37 @@ const RecommendationsForMe = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-gradient-to-r from-red-600 to-red-800 text-white py-8">
+      <div className="bg-gradient-to-r from-red-600 to-red-800 text-white py-6 sm:py-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">
             Recommendations For My Queries
           </h1>
-          <p className="text-blue-100">
+          <p className="text-red-100 text-sm sm:text-base">
             See all the recommendations others have made for your queries
           </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         {queryGroups && queryGroups.length > 0 ? (
-          <div className="space-y-8">
-            <div className="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 border-l-4 border-red-500">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-red-600">
+                  <div className="text-xl sm:text-2xl font-bold text-red-600">
                     {queryGroups.length}
                   </div>
-                  <div className="text-gray-600">
+                  <div className="text-gray-600 text-sm sm:text-base">
                     Queries with Recommendations
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-red-600">
+                  <div className="text-xl sm:text-2xl font-bold text-red-600">
                     {recommendations.length}
                   </div>
-                  <div className="text-gray-600">Total Recommendations</div>
+                  <div className="text-gray-600 text-sm sm:text-base">
+                    Total Recommendations
+                  </div>
                 </div>
               </div>
             </div>
@@ -70,26 +72,26 @@ const RecommendationsForMe = () => {
                 className="bg-white rounded-lg shadow-lg overflow-hidden"
               >
                 <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="text-xl font-bold mb-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div className="flex-1">
+                      <h2 className="text-lg sm:text-xl font-bold mb-1">
                         {group.queryInfo.queryTitle}
                       </h2>
-                      <p className="text-green-100">
+                      <p className="text-red-100 text-sm sm:text-base">
                         Product: {group.queryInfo.productName}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full">
+                    <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full self-start sm:self-center">
                       <FaStar className="text-yellow-300" />
-                      <span className="text-sm text-gray-600 font-semibold">
+                      <span className="text-xs sm:text-sm text-gray-600 font-semibold">
                         {group.recommendations.length} Recommendations
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <div className="space-y-6">
+                <div className="p-4 sm:p-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {group.recommendations
                       .sort(
                         (a, b) => new Date(b.dateTime) - new Date(a.dateTime)
@@ -97,19 +99,19 @@ const RecommendationsForMe = () => {
                       .map((recommendation) => (
                         <div
                           key={recommendation._id}
-                          className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow bg-gray-50"
+                          className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow bg-gray-50"
                         >
-                          <div className="flex items-center gap-3 mb-4">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
                             <div className="flex-1">
-                              <h4 className="font-semibold text-gray-800 flex items-center gap-2">
+                              <h4 className="font-semibold text-gray-800 flex items-center gap-2 text-sm sm:text-base">
                                 <FaUser className="text-red-600" size={12} />
                                 {recommendation.recommenderName}
                               </h4>
-                              <p className="text-sm text-gray-600">
+                              <p className="text-xs sm:text-sm text-gray-600">
                                 {recommendation.recommenderEmail}
                               </p>
                             </div>
-                            <div className="text-sm text-gray-500 flex items-center gap-1">
+                            <div className="text-xs sm:text-sm text-gray-500 flex items-center gap-1">
                               <IoCalendarOutline size={14} />
                               {new Date(
                                 recommendation.dateTime
@@ -121,20 +123,20 @@ const RecommendationsForMe = () => {
                             </div>
                           </div>
 
-                          <div className="bg-white rounded-lg p-4 border border-gray-300">
-                            <h5 className="font-bold text-lg text-red-600 mb-3">
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-gray-300">
+                            <h5 className="font-bold text-base sm:text-lg text-red-600 mb-3">
                               {recommendation.recommendationTitle}
                             </h5>
 
-                            <div className="flex gap-20">
-                              <div className="md:col-span-1">
+                            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                              <div className="flex-shrink-0 self-center sm:self-start">
                                 <img
                                   src={recommendation.recommendedProductImage}
-                                  className="w-35 h-35 object-contain bg-gray-50 rounded-lg border border-gray-200"
+                                  className="w-24 h-24 sm:w-32 sm:h-32 object-contain bg-gray-50 rounded-lg border border-gray-200 mx-auto"
                                 />
                               </div>
-                              <div className="md:col-span-2">
-                                <h6 className="font-semibold text-gray-800 mb-2 text-lg">
+                              <div className="flex-1">
+                                <h6 className="font-semibold text-gray-800 mb-2 text-base sm:text-lg">
                                   {recommendation.recommendedProductName}
                                 </h6>
                                 <div className="bg-blue-50 p-3 rounded-lg">
@@ -157,11 +159,11 @@ const RecommendationsForMe = () => {
           </div>
         ) : (
           <div className="text-center py-12">
-            <div className="text-gray-400 text-6xl mb-4">🎯</div>
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+            <div className="text-gray-400 text-5xl sm:text-6xl mb-4">🎯</div>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-600 mb-2">
               No recommendations yet
             </h3>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-500 mb-6 text-sm sm:text-base px-4">
               You haven't received any recommendations for your queries yet.
               Share your queries to get helpful suggestions from the community!
             </p>

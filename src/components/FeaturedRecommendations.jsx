@@ -102,7 +102,7 @@ const FeaturedRecommendations = () => {
       <div className="text-center mt-12">
         <Link
           to={`/recommendations-for-me/${user?.email}`}
-          className="bg-red-900 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold inline-block transition-colors"
+          className="bg-red-900 hover:bg-red-700 text-white text-sm md:text-md px-8 py-3 rounded-lg font-semibold inline-block transition-colors"
         >
           View All Recommendations For You
         </Link>

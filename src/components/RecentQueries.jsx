@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 const RecentQueries = () => {
   const [queries, setQueries] = useState([]);
-  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("http://localhost:3000/queries")
@@ -50,7 +49,7 @@ const RecentQueries = () => {
                 <span className="text-xs text-gray-500">
                   {new Date(query.dateTime).toLocaleDateString()}
                 </span>
-                <span className="badge bg-red-500 text-white">
+                <span className="badge bg-red-500 text-white text-sm md:text-[12px] lg:text-[10px]">
                   {query.recommendationCount} recommendations
                 </span>
               </div>
