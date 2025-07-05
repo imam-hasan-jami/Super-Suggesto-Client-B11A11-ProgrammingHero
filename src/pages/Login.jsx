@@ -10,6 +10,15 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const getErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/invalid-credential":
+        return "Invalid email or password.";
+      default:
+        return "Login failed. Please check your credentials and try again.";
+    }
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -29,14 +38,17 @@ const Login = () => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        const errorMessage = getErrorMessage(errorCode);
+
+        console.log(errorCode, error.message);
+
         Swal.fire({
           position: "center",
           icon: "error",
-          title: `Incorrect email or password!`,
-          showConfirmButton: false,
-          timer: 2000,
+          title: "Login Failed",
+          text: errorMessage,
+          showConfirmButton: true,
+          confirmButtonColor: "#dc2626",
         });
       });
   };
