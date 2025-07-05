@@ -27,7 +27,7 @@ const UpdateQuery = () => {
     updatedQuery.userPhotoURL = user?.photoURL || "";
     updatedQuery.dateTime = new Date().toISOString();
 
-    fetch(`http://localhost:3000/queries/${_id}`, {
+    fetch(`https://suggesto-server.vercel.app/queries/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

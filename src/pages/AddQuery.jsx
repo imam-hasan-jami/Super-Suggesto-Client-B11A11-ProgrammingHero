@@ -19,7 +19,7 @@ const AddQuery = () => {
     newQuery.dateTime = new Date().toISOString();
     newQuery.recommendationCount = 0;
 
-    fetch("http://localhost:3000/queries", {
+    fetch("https://suggesto-server.vercel.app/queries", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
     };
 
     const fetchUserData = (email) => {
-      fetch(`http://localhost:3000/users/${email}`)
+      fetch(`https://suggesto-server.vercel.app/users/${email}`)
         .then((res) => res.json())
         .then((data) => {
           setUser(data);

@@ -38,7 +38,7 @@ const Register = () => {
           ...restFormData,
         };
 
-        return fetch("http://localhost:3000/users", {
+        return fetch("https://suggesto-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -49,7 +49,7 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          console.log("User profile created successfully", data);
+          // console.log("User profile created successfully", data);
           Swal.fire({
             position: "center",
             icon: "success",

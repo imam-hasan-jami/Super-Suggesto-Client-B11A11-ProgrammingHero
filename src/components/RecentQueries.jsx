@@ -4,7 +4,7 @@ const RecentQueries = () => {
   const [queries, setQueries] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/queries")
+    fetch("https://suggesto-server.vercel.app/queries")
       .then((res) => res.json())
       .then((data) => {
         const sortedQueries = data

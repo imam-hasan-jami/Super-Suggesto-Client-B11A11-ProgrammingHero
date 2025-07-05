@@ -15,7 +15,7 @@ const QueryDetails = () => {
 
   useEffect(() => {
     if (query?._id) {
-      fetch(`http://localhost:3000/recommendations/query/${query._id}`)
+      fetch(`https://suggesto-server.vercel.app/recommendations/query/${query._id}`)
         .then((res) => res.json())
         .then((data) => {
           setRecommendations(data);
@@ -44,7 +44,7 @@ const QueryDetails = () => {
     newRecommendation.recommenderName = user?.name || "";
     newRecommendation.dateTime = new Date().toISOString();
 
-    fetch("http://localhost:3000/recommendations", {
+    fetch("https://suggesto-server.vercel.app/recommendations", {
       method: "POST",
       headers: {
         "content-type": "application/json",

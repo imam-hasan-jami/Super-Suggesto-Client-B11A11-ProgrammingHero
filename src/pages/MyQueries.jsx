@@ -17,7 +17,7 @@ const MyQueries = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/queries/${_id}`, {
+        fetch(`https://suggesto-server.vercel.app/queries/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

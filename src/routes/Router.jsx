@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/queries",
-        loader: () => fetch("http://localhost:3000/queries"),
+        loader: () => fetch("https://suggesto-server.vercel.app/queries"),
         hydrateFallbackElement: <Loading />,
         Component: Queries,
       },
@@ -44,31 +44,31 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-queries/:email",
-        loader: ({ params }) => fetch(`http://localhost:3000/queries/user/${params.email}`),
+        loader: ({ params }) => fetch(`https://suggesto-server.vercel.app/queries/user/${params.email}`),
         hydrateFallbackElement: <Loading />,
         element: <PrivateRoute><MyQueries/></PrivateRoute>
       },
       {
         path: "/query-details/:id",
-        loader: ({ params }) => fetch(`http://localhost:3000/queries/${params.id}`),
+        loader: ({ params }) => fetch(`https://suggesto-server.vercel.app/queries/${params.id}`),
         hydrateFallbackElement: <Loading />,
         Component: QueryDetails,
       },
       {
         path: "/update-query/:id",
-        loader: ({ params }) => fetch(`http://localhost:3000/queries/${params.id}`),
+        loader: ({ params }) => fetch(`https://suggesto-server.vercel.app/queries/${params.id}`),
         hydrateFallbackElement: <Loading />,
         Component: UpdateQuery,
       },
       {
         path: "/my-recommendations/:email",
-        loader: ({ params }) => fetch(`http://localhost:3000/recommendations/recommender/${params.email}`),
+        loader: ({ params }) => fetch(`https://suggesto-server.vercel.app/recommendations/recommender/${params.email}`),
         hydrateFallbackElement: <Loading />,
         Component: MyRecommendations,
       },
       {
         path: "/recommendations-for-me/:email",
-        loader: ({ params }) => fetch(`http://localhost:3000/recommendations/user/${params.email}`),
+        loader: ({ params }) => fetch(`https://suggesto-server.vercel.app/recommendations/user/${params.email}`),
         hydrateFallbackElement: <Loading />,
         Component: RecommendationsForMe,
       }

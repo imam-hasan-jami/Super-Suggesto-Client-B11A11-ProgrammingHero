@@ -8,7 +8,7 @@ const FeaturedRecommendations = () => {
   const [featuredRecommendations, setFeaturedRecommendations] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/recommendations")
+    fetch("https://suggesto-server.vercel.app/recommendations")
       .then((res) => res.json())
       .then((data) => {
         const sortedRecommendations = data
