@@ -4,8 +4,7 @@ import { AuthContext } from "../providers/AuthContext";
 import Swal from "sweetalert2";
 
 const Login = () => {
-
-  const { loginUser } = use(AuthContext);
+  const { loginUser, googleSignIn } = use(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -53,7 +52,35 @@ const Login = () => {
       });
   };
 
-  const handleGoogleSignIn = () => {}
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        navigate(`${location.state ? location.state : "/"}`);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Login successful`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = getErrorMessage(errorCode);
+
+        console.log(errorCode, error.message);
+
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Login Failed",
+          text: errorMessage,
+          showConfirmButton: true,
+          confirmButtonColor: "#dc2626",
+        });
+      });
+  };
 
   return (
     <div className="flex justify-center min-h-[calc(100vh-330px)] items-center">
