@@ -1,9 +1,24 @@
 import React, { use } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../providers/AuthContext";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser } = use(AuthContext);
+  const navigate = useNavigate();
+
+  const getErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/email-already-in-use":
+        return "This email is already registered. Please use a different email.";
+      case "auth/invalid-email":
+        return "Please enter a valid email address.";
+      case "auth/weak-password":
+        return "Password is too weak. Please use at least 6 characters.";
+      default:
+        return "Registration failed. Please try again.";
+    }
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -14,34 +29,51 @@ const Register = () => {
       formData.entries()
     );
 
-    createUser(email, password).then((result) => {
-      const user = result.user;
-      console.log("user registered successfully", user);
-    });
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        navigate("/");
+        const userProfile = {
+          email,
+          ...restFormData,
+        };
 
-    const userProfile = {
-      email,
-      ...restFormData,
-    };
-
-    fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userProfile),
-    })
+        return fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userProfile),
+        });
+      })
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
           console.log("User profile created successfully", data);
-          // form.reset();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Registration successful",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          form.reset();
         }
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        const errorMessage = getErrorMessage(errorCode);
+
+        console.log(errorCode, error.message);
+
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Registration Failed",
+          text: errorMessage,
+          showConfirmButton: true,
+          confirmButtonColor: "#dc2626",
+        });
       });
   };
 
