@@ -12,11 +12,13 @@ import Queries from "../pages/Queries";
 import MyRecommendations from "../pages/MyRecommendations";
 import RecommendationsForMe from "../pages/RecommendationsForMe";
 import PrivateRoute from "../providers/PrivateRoute";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
